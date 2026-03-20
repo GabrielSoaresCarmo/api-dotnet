@@ -1,4 +1,13 @@
 @api_dotnet_HostAddress = http://localhost:3000
 
-GET {{api_dotnet_HostAddress}}/
-Accept: application/json
+#GET {{api_dotnet_HostAddress}}/
+#Accept: application/json
+
+#POST {{api_dotnet_HostAddress}}/login
+#Content-Type: application/json
+#Accept: application/json
+#
+#{
+#    "email": "admin@email.com",
+#    "password": "12345" 
+#}
