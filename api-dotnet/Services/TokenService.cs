@@ -15,7 +15,7 @@ public class TokenService
     public string GenerateToken(string userId, string email)
     {
         var jwtConfig = _config.GetSection("Jwt");
-        var key = Encoding.UTF8.GetBytes(jwtConfig["Key"]);
+        var key = Encoding.UTF8.GetBytes(jwtConfig["Key"]!);
 
         // Claims = informações dentro do token
         var claims = new[]
@@ -28,7 +28,7 @@ public class TokenService
         {
             Subject = new ClaimsIdentity(claims),
             Expires = DateTime.UtcNow.AddMinutes(
-                double.Parse(jwtConfig["ExpiresInMinutes"])
+                double.Parse(jwtConfig["ExpiresInMinutes"]!)
             ),
             Issuer = jwtConfig["Issuer"],
             Audience = jwtConfig["Audience"],
