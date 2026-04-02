@@ -1,9 +1,11 @@
 using System.ComponentModel.DataAnnotations;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.IdentityModel.Tokens;
 using SQLitePCL;
 
@@ -93,7 +95,50 @@ app.MapPost("/order", async(Order order, OrderDbContext db) =>
         }
         await db.Orders.AddAsync(order);
         await db.SaveChangesAsync();
-        return Results.Created("deu certo", order);
+        return Results.Created($"/order/{order.OrderId}", order);
+    }
+    catch (System.Exception ex)
+    {
+        //consertar - o id do item nao pode existir na tabela
+        return Results.BadRequest(ex.Message);
+        throw;
+    }
+}).RequireAuthorization();
+
+app.MapGet("/order/{orderId}", async(string orderId, OrderDbContext db) =>
+{
+    try
+    {
+        var order = await db.Orders.Include(o => o.Items).FirstOrDefaultAsync(o => o.OrderId == orderId);
+        if(order is null)
+        {
+            return Results.Conflict($"""The "numeroPedido": "{orderId}" not exists on database""");
+        }
+        else
+        {
+            return Results.Ok(order);
+        }
+    }
+    catch (System.Exception ex)
+    {
+        return Results.BadRequest(ex.Message);
+        throw;
+    }
+}).RequireAuthorization();
+
+app.MapGet("/order/list", async(OrderDbContext db) =>
+{
+    try
+    {
+        var orders = await db.Orders.
+                    Select(o => new
+                    {
+                        o.OrderId,
+                        o.Value,
+                        o.CreationDate,
+                        o.Items
+                    }).ToListAsync();
+        return Results.Ok(orders);
     }
     catch (System.Exception ex)
     {
@@ -130,7 +175,7 @@ public class Item
     public int Quantity { get; set; }
     [JsonPropertyName("valorItem")]
     public double Price { get; set; }
-    public string OrderId { get; set; } = string.Empty;
+    //public string OrderId { get; set; } = string.Empty;
 }
 
 record Login(string email, string password);

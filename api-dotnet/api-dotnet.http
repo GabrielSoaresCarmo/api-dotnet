@@ -2,7 +2,6 @@
 
 #GET {{api_dotnet_HostAddress}}/
 #Accept: application/json
-#Authorization: Bearer 
 
 #POST {{api_dotnet_HostAddress}}/login
 #Content-Type: application/json
@@ -16,18 +15,25 @@
 #POST {{api_dotnet_HostAddress}}/order
 #Content-Type: application/json
 #Accept: application/json
-#Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIxIiwiZW1haWwiOiJhZG1pbkBlbWFpbC5jb20iLCJuYmYiOjE3NzQ2MzY1NzgsImV4cCI6MTc3NDY0MDE3OCwiaWF0IjoxNzc0NjM2NTc4LCJpc3MiOiJhcGktZG90bmV0IiwiYXVkIjoiY2xpZW50ZXMifQ.xmSPcUEDB3WOCF-JvoPhWIBTjtvMbdUcZJGQ8w2_9cI
+#Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIxIiwiZW1haWwiOiJhZG1pbkBlbWFpbC5jb20iLCJuYmYiOjE3NzUxNTU2OTQsImV4cCI6MTc3NTE1OTI5NCwiaWF0IjoxNzc1MTU1Njk0LCJpc3MiOiJhcGktZG90bmV0IiwiYXVkIjoiY2xpZW50ZXMifQ.R00dGGB3Ixlg1r3AtWuBwo3HGGgWS-TsS_2o4AggATM
 #
-#{   
-#    "numeroPedido": "v089015vdb-01",
-#    "valorTotal": 10000, 
-#    "dataCriacao": "2023-07-19T12:24:11.5299601+00:00",
-#    "items": 
-#    [ 
-#        { 
-#            "idItem": "2434", 
-#            "quantidadeItem": 1, 
-#            "valorItem": 1000
-#        } 
-#    ] 
+#{
+#	"numeroPedido": "v10089015vdb-01",
+#	"valorTotal": 10000,
+#	"dataCriacao": "2023-07-19T12:24:11.5299601+00:00",
+#	"items": [
+#       {
+#			"idItem": "2434",
+#			"quantidadeItem": 1,
+#			"valorItem": 1000
+#		}
+#	]
 #}
+
+#GET {{api_dotnet_HostAddress}}/order/v10089015vdb-01
+#Accept: application/json
+#Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIxIiwiZW1haWwiOiJhZG1pbkBlbWFpbC5jb20iLCJuYmYiOjE3NzUxNTU2OTQsImV4cCI6MTc3NTE1OTI5NCwiaWF0IjoxNzc1MTU1Njk0LCJpc3MiOiJhcGktZG90bmV0IiwiYXVkIjoiY2xpZW50ZXMifQ.R00dGGB3Ixlg1r3AtWuBwo3HGGgWS-TsS_2o4AggATM
+
+#GET {{api_dotnet_HostAddress}}/order/list
+#Accept: application/json
+#Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIxIiwiZW1haWwiOiJhZG1pbkBlbWFpbC5jb20iLCJuYmYiOjE3NzUxNTU2OTQsImV4cCI6MTc3NTE1OTI5NCwiaWF0IjoxNzc1MTU1Njk0LCJpc3MiOiJhcGktZG90bmV0IiwiYXVkIjoiY2xpZW50ZXMifQ.R00dGGB3Ixlg1r3AtWuBwo3HGGgWS-TsS_2o4AggATM
